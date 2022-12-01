@@ -44,7 +44,41 @@ public class ClientServerThread extends Thread {
         return cst;
     }
 
-    public boolean isConnected(){return socket != null && socket.isConnected();}
+    public boolean isConnected() {
+        return socket != null && socket.isConnected();
+    }
+    @Override
+    public void run() {
 
+        try {
+
+            if (socket == null) {
+                socket = serverSocket.accept();
+                oos = new ObjectOutputStream(socket.getOutputStream());
+            }
+            var ois = new ObjectInputStream((socket.getInputStream()));
+            while (true) {
+                Object obj = ois.readObject();
+                // TODO CHECKEN OB DIE IFABFRAGE RECHTENS IST
+                if (obj instanceof Pong) {
+                    // Hier wird dann glaube ich Position von Ball und Schläger hin und her geschoben
+
+                } else if (obj instanceof String) {
+
+                    switch ((String) obj) {
+                        // case "Trade" -> {poketrade.trade();}
+                    }
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }
+
+
+
+

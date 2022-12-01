@@ -25,10 +25,14 @@ public class Pong extends PApplet{
     @Override
     public void settings(){
         setSize(720, 720);
+        noStroke();
+        frameRate(60);
+        ellipseMode(RADIUS);
+
     }
     @Override
     public void setup(){}
 
     @Override
-    public void draw(){}
+    public void draw(){background(255);}
 }
